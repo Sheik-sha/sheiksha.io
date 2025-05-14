@@ -1,0 +1,787 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', sans-serif;
+}
+
+body {
+    background-color: #f5f7fa;
+    color: #2d3436;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+header {
+    background: linear-gradient(135deg, #6c5ce7, #a363d9);
+    color: white;
+    padding: 2rem;
+    border-radius: 15px;
+    margin-bottom: 2rem;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+header h1 {
+    margin-bottom: 1rem;
+}
+
+.timing-info {
+    display: flex;
+    gap: 2rem;
+}
+
+.dashboard {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+}
+
+.card {
+    background: white;
+    padding: 1.5rem;
+    border-radius: 15px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+}
+
+.card h2 {
+    color: #2d3436;
+    margin-bottom: 1rem;
+}
+
+.room-count, .vacancy-count {
+    text-align: center;
+}
+
+.room-count span, .vacancy-count span {
+    font-size: 3rem;
+    font-weight: bold;
+    color: #6c5ce7;
+}
+
+.fees-list {
+    max-height: 300px;
+    overflow-y: auto;
+    padding: 0.5rem;
+}
+
+.fee-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.8rem;
+    margin: 0.5rem 0;
+    background: rgba(108, 92, 231, 0.1);
+    border-radius: 8px;
+    transition: transform 0.3s ease;
+}
+
+.fee-item:hover {
+    transform: translateX(5px);
+    background: rgba(108, 92, 231, 0.2);
+}
+
+.admin-dashboard .info-cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+    margin-top: 2rem;
+}
+
+.admin-dashboard .card {
+    min-height: 200px;
+}
+
+.fee-item {
+    padding: 1rem;
+    border-bottom: 1px solid #eee;
+    display: flex;
+    justify-content: space-between;
+}
+
+.fee-item:last-child {
+    border-bottom: none;
+}
+
+
+/* Add these styles at the beginning of your existing CSS file */
+.login-container {
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    overflow: hidden;
+}
+
+/* User Login Styles */
+.login-container.user-login {
+    background: linear-gradient(135deg, #6c5ce7, #a363d9);
+}
+
+/* Admin Login Styles */
+.login-container.admin-login {
+    background: linear-gradient(135deg, #2c3e50, #3498db);
+}
+
+.login-card {
+    position: relative;
+    background: rgba(255, 255, 255, 0.95);
+    padding: 2.5rem;
+    border-radius: 20px;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+    backdrop-filter: blur(10px);
+    border: 2px solid rgba(255, 255, 255, 0.1);
+    width: 100%;
+    max-width: 400px;
+    animation: cardFloat 0.8s ease;
+}
+
+/* User-specific login card */
+.user-login .login-card {
+    background: linear-gradient(to bottom right, rgba(255, 255, 255, 0.95), rgba(255, 255, 255, 0.85));
+    border-color: rgba(108, 92, 231, 0.2);
+}
+
+/* Admin-specific login card */
+.admin-login .login-card {
+    background: linear-gradient(to bottom right, rgba(255, 255, 255, 0.95), rgba(240, 240, 240, 0.9));
+    border-color: rgba(52, 152, 219, 0.2);
+}
+
+.login-type-buttons {
+    margin-bottom: 2rem;
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+}
+
+.type-btn {
+    padding: 0.8rem 2rem;
+    border: 2px solid;
+    background: transparent;
+    border-radius: 25px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+/* User button styles */
+.type-btn[data-type="user"] {
+    border-color: #6c5ce7;
+    color: #6c5ce7;
+}
+
+.type-btn[data-type="user"].active {
+    background: #6c5ce7;
+    color: white;
+    transform: scale(1.05);
+}
+
+/* Admin button styles */
+.type-btn[data-type="admin"] {
+    border-color: #2c3e50;
+    color: #2c3e50;
+}
+
+.type-btn[data-type="admin"].active {
+    background: #2c3e50;
+    color: white;
+    transform: scale(1.05);
+}
+
+@keyframes cardFloat {
+    0% {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Add floating particles effect */
+.login-container::before,
+.login-container::after {
+    content: '';
+    position: absolute;
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    animation: float 15s infinite linear;
+}
+
+.login-container::before {
+    background: rgba(108, 92, 231, 0.1);
+    top: -100px;
+    left: -100px;
+}
+
+.login-container::after {
+    background: rgba(163, 99, 217, 0.1);
+    bottom: -100px;
+    right: -100px;
+    animation-delay: -7.5s;
+}
+
+@keyframes float {
+    0% {
+        transform: translate(0, 0) rotate(0deg);
+    }
+    50% {
+        transform: translate(100px, 100px) rotate(180deg);
+    }
+    100% {
+        transform: translate(0, 0) rotate(360deg);
+    }
+}
+
+/* Form input styles based on user type */
+.user-login .form-group input:focus {
+    border-bottom-color: #6c5ce7;
+}
+
+.admin-login .form-group input:focus {
+    border-bottom-color: #2c3e50;
+}
+
+.user-login .form-group input:focus ~ label {
+    color: #6c5ce7;
+}
+
+.admin-login .form-group input:focus ~ label {
+    color: #2c3e50;
+}
+
+/* Login button styles based on user type */
+.user-login .login-btn {
+    background: #6c5ce7;
+}
+
+.admin-login .login-btn {
+    background: #2c3e50;
+}
+
+.user-login .login-btn:hover {
+    background: #5b4cc4;
+}
+
+.admin-login .login-btn:hover {
+    background: #234567;
+}
+
+.form-group {
+    position: relative;
+    margin-bottom: 2rem;
+}
+
+.form-group input {
+    width: 100%;
+    padding: 10px 0;
+    border: none;
+    border-bottom: 2px solid #ddd;
+    outline: none;
+    font-size: 1rem;
+    transition: border-color 0.3s ease;
+}
+
+.form-group label {
+    position: absolute;
+    left: 0;
+    top: 10px;
+    color: #999;
+    pointer-events: none;
+    transition: 0.3s ease all;
+}
+
+.form-group input:focus ~ label,
+.form-group input:valid ~ label {
+    top: -20px;
+    font-size: 0.8rem;
+    color: #6c5ce7;
+}
+
+.form-group input:focus {
+    border-bottom-color: #6c5ce7;
+}
+
+.login-btn {
+    width: 100%;
+    padding: 1rem;
+    background: #6c5ce7;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: transform 0.3s ease, background 0.3s ease;
+}
+
+.login-btn:hover {
+    background: #5b4cc4;
+    transform: translateY(-2px);
+}
+
+.hostel-name {
+    text-align: center;
+    color: #6c5ce7;
+    font-size: 2rem;
+    margin-bottom: 1.5rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    animation: fadeInDown 0.6s ease;
+}
+
+@keyframes fadeInDown {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Add this for the main content animation */
+.fade-in {
+    animation: fadeIn 0.5s ease;
+}
+
+/* Keep your existing CSS below */
+.success-popup {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: rgba(0, 0, 0, 0.8);
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    animation: fadeIn 0.3s ease;
+}
+
+.popup-content {
+    background: white;
+    padding: 2rem;
+    border-radius: 10px;
+    text-align: center;
+    animation: slideIn 0.3s ease;
+}
+
+.popup-content h3 {
+    color: #6c5ce7;
+    margin-bottom: 1rem;
+}
+
+@keyframes slideIn {
+    from {
+        transform: translateY(-20px);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+.user-dashboard {
+    padding: 2rem;
+    background: linear-gradient(135deg, rgba(108, 92, 231, 0.1), rgba(163, 99, 217, 0.1));
+    border-radius: 20px;
+    animation: dashboardFadeIn 1s ease;
+}
+
+.info-cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 2rem;
+    margin-top: 2rem;
+    perspective: 1000px;
+}
+
+.card {
+    background: white;
+    padding: 2rem;
+    border-radius: 15px;
+    box-shadow: 0 10px 20px rgba(108, 92, 231, 0.1);
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    border: 2px solid transparent;
+    position: relative;
+    overflow: hidden;
+}
+
+.card:hover {
+    transform: translateY(-10px) rotateX(5deg);
+    border-color: #6c5ce7;
+    box-shadow: 0 15px 30px rgba(108, 92, 231, 0.2);
+}
+
+.card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(45deg, 
+        rgba(108, 92, 231, 0.1), 
+        rgba(163, 99, 217, 0.1), 
+        rgba(108, 92, 231, 0.1));
+    transform: translateX(-100%);
+    transition: transform 0.6s ease;
+}
+
+.card:hover::before {
+    transform: translateX(100%);
+}
+
+.card h3 {
+    color: #6c5ce7;
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+    position: relative;
+    animation: titlePulse 2s infinite;
+}
+
+.card p {
+    color: #2d3436;
+    margin: 0.5rem 0;
+    position: relative;
+    transition: transform 0.3s ease;
+}
+
+.card:hover p {
+    transform: translateX(10px);
+}
+
+@keyframes titlePulse {
+    0% { color: #6c5ce7; }
+    50% { color: #a363d9; }
+    100% { color: #6c5ce7; }
+}
+
+@keyframes dashboardFadeIn {
+    from {
+        opacity: 0;
+        transform: scale(0.95);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+.info-card-content {
+    background: linear-gradient(135deg, #ffffff, #f8f9fa);
+    border: 2px solid #6c5ce7;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+    animation: modalPopIn 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+}
+
+.info-details ul li {
+    padding: 0.8rem;
+    margin: 0.5rem 0;
+    border-radius: 8px;
+    background: linear-gradient(to right, rgba(108, 92, 231, 0.1), transparent);
+    transform-origin: left;
+    animation: listItemExpand 0.5s ease forwards;
+}
+
+@keyframes modalPopIn {
+    from {
+        transform: translate(-50%, -50%) scale(0.8);
+        opacity: 0;
+    }
+    to {
+        transform: translate(-50%, -50%) scale(1);
+        opacity: 1;
+    }
+}
+
+@keyframes listItemExpand {
+    from {
+        transform: scaleX(0);
+        opacity: 0;
+    }
+    to {
+        transform: scaleX(1);
+        opacity: 1;
+    }
+}
+
+.close-modal {
+    background: #6c5ce7;
+    color: white;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+}
+
+.close-modal:hover {
+    transform: rotate(180deg);
+    background: #a363d9;
+}
+
+.switch-form {
+    text-align: center;
+    margin-top: 1rem;
+}
+
+.switch-form a {
+    color: #6c5ce7;
+    text-decoration: none;
+}
+
+.switch-form a:hover {
+    text-decoration: underline;
+}
+
+.user-type-select {
+    margin-bottom: 1rem;
+    width: 100%;
+    padding: 0.5rem;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+}
+
+.login-type-buttons {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 2rem;
+    justify-content: center;
+}
+
+.type-btn {
+    padding: 0.8rem 2rem;
+    border: 2px solid #6c5ce7;
+    background: transparent;
+    color: #6c5ce7;
+    border-radius: 25px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: all 0.3s ease;
+}
+
+.type-btn.active {
+    background: #6c5ce7;
+    color: white;
+}
+
+.register-link {
+    text-align: center;
+    margin-top: 1rem;
+}
+
+.register-link a {
+    color: #6c5ce7;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.register-link a:hover {
+    text-decoration: underline;
+}
+
+.register-btn {
+    background: #6c5ce7;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+    width: 100%;
+    margin-top: 10px;
+}
+
+.register-btn:hover {
+    background: #5344c7;
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+.register-section {
+    text-align: center;
+    margin-top: 20px;
+    padding-top: 20px;
+    border-top: 1px solid #eee;
+}
+
+.register-section p {
+    color: #666;
+    margin-bottom: 10px;
+}
+
+.register-btn:hover {
+    background: #686de0;
+}
+
+/* Remove the nested modal styles and add them at the root level */
+.modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.8);
+    display: none;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.modal-content {
+    background: white;
+    padding: 2rem;
+    border-radius: 15px;
+    width: 90%;
+    max-width: 400px;
+    position: relative;
+    animation: modalSlideIn 0.5s ease;
+}
+
+.info-card-modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.8);
+    z-index: 1000;
+    animation: fadeIn 0.3s ease;
+}
+
+.info-card-content {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: white;
+    padding: 2rem;
+    border-radius: 15px;
+    width: 90%;
+    max-width: 500px;
+    animation: modalSlideIn 0.5s ease;
+}
+
+.registration-container {
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: linear-gradient(135deg, #6c5ce7, #a363d9);
+    padding: 2rem;
+}
+
+.registration-card {
+    background: white;
+    padding: 2rem;
+    border-radius: 15px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+    width: 100%;
+    max-width: 500px;
+    animation: slideUp 0.5s ease;
+}
+
+.registration-card h2 {
+    color: #2d3436;
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+.button-group {
+    display: flex;
+    gap: 1rem;
+    margin-top: 2rem;
+}
+
+.register-submit-btn {
+    flex: 2;
+    padding: 1rem;
+    background: #6c5ce7;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.cancel-btn {
+    flex: 1;
+    padding: 1rem;
+    background: #ddd;
+    color: #333;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.register-submit-btn:hover,
+.cancel-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+.form-group select {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    background: white;
+    color: #333;
+    margin-top: 1rem;
+}
+
+.form-group select:focus {
+    border-color: #6c5ce7;
+    outline: none;
+}
+
+@keyframes slideUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-group input {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    transition: border-color 0.3s ease;
+}
+
+.form-group input:focus {
+    border-color: #6c5ce7;
+    outline: none;
+}

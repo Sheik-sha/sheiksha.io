@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wind-art PG - Hostel Management System</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="login-container" id="loginContainer">
+        <div class="login-card">
+            <h1 class="hostel-name">Wind-art PG</h1>
+            <div class="login-type-buttons">
+                <button type="button" class="type-btn active" data-type="user">User</button>
+                <button type="button" class="type-btn" data-type="admin">Admin</button>
+            </div>
+            <!-- Remove these lines -->
+            <!-- <button class="register-btn">Register New User</button> -->
+            <h2>Login</h2>
+            <form id="loginForm">
+                <div class="form-group">
+                    <input type="text" id="username" required>
+                    <label>Username</label>
+                </div>
+                <div class="form-group">
+                    <input type="password" id="password" required>
+                    <label>Password</label>
+                </div>
+                <button type="submit" class="login-btn">Login</button>
+                <div class="register-section">
+                    <p>Don't have an account?</p>
+                    <button type="button" class="register-btn" onclick="showRegisterModal()">Create Account</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Remove the entire registration modal -->
+    <!-- <div id="registerModal" class="modal">...</div> -->
+
+    <!-- Registration Form Container -->
+    <div id="registrationContainer" class="registration-container" style="display: none;">
+        <div class="registration-card">
+            <h1 class="hostel-name">Wind-art PG</h1>
+            <h2>Student Registration</h2>
+            <form id="registrationForm">
+                <div class="form-group">
+                    <input type="text" id="fullName" required>
+                    <label>Full Name</label>
+                </div>
+                <div class="form-group">
+                    <input type="text" id="regUsername" required>
+                    <label>Username</label>
+                </div>
+                <div class="form-group">
+                    <input type="email" id="email" required>
+                    <label>Email</label>
+                </div>
+                <div class="form-group">
+                    <input type="tel" id="phone" required>
+                    <label>Phone Number</label>
+                </div>
+                <div class="form-group">
+                    <input type="text" id="address" required>
+                    <label>Address</label>
+                </div>
+                <div class="form-group">
+                    <select id="roomType" required>
+                        <option value="">Select Room Type</option>
+                        <option value="single">Single Occupancy - ₹5000/month</option>
+                        <option value="double">Double Sharing - ₹3500/month</option>
+                        <option value="triple">Triple Sharing - ₹3000/month</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <input type="password" id="regPassword" required>
+                    <label>Password</label>
+                </div>
+                <div class="form-group">
+                    <input type="password" id="confirmPassword" required>
+                    <label>Confirm Password</label>
+                </div>
+                <div class="button-group">
+                    <button type="submit" class="register-submit-btn">Register</button>
+                    <button type="button" class="cancel-btn" onclick="goBackToLogin()">Cancel</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div class="container" id="mainContent" style="display: none;">
+        <header>
+            <div class="header-content">
+                <button class="back-btn" onclick="goBackToLogin()">← Back to Login</button>
+                <h1>Wind-art PG</h1>
+                <h2>Hostel Management System</h2>
+                <!-- Add admin control button -->
+                <button class="admin-control-btn" onclick="showAdminControls()">Admin Controls</button>
+                <div class="timing-info">
+                    <p>Opening Time: 6:00 AM</p>
+                    <p>Closing Time: 10:00 PM</p>
+                </div>
+            </div>
+        </header>
+
+        <main>
+            <section class="dashboard">
+                <div class="card room-status">
+                    <h2>Room Availability</h2>
+                    <div class="room-count">
+                        <span id="availableRooms">0</span>
+                        <p>Available Rooms</p>
+                    </div>
+                </div>
+
+                <div class="card vacancies">
+                    <h2>Current Vacancies</h2>
+                    <div class="vacancy-count">
+                        <span id="vacancyCount">0</span>
+                        <p>Total Vacancies</p>
+                    </div>
+                </div>
+
+                <div class="card pending-fees">
+                    <h2>Pending Fees</h2>
+                    <div class="fee-list" id="pendingFeesList">
+                        <!-- Will be populated by JavaScript -->
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
